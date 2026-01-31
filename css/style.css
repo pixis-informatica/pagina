@@ -19,6 +19,45 @@ html {
     text-shadow: 0 0 20px #ffd700;
     margin: 60px 0 30px;
 }
+.carousel {
+    overflow: hidden;
+    position: relative;
+}
+
+.destacados .productos {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: scroll-carousel 25s linear infinite;
+}
+
+/* pausa al pasar el mouse */
+.carousel:hover .productos {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-carousel {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* cards dentro del carrusel */
+.destacados .card {
+    min-width: 280px;
+    max-width: 280px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .destacados .card {
+        min-width: 240px;
+        max-width: 240px;
+    }
+}
 .btn-top {
     position: fixed;
     bottom: 110px;
@@ -34,8 +73,25 @@ html {
     justify-content: center;
     text-decoration: none;
     box-shadow: 0 0 20px #ff00ff;
-    transition: 0.3s;
+    transition: opacity 0.4s ease, transform 0.4s ease;
     z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+   
+}
+.btn-top {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* cuando se apunta a cualquier categoría */
+body:has(.categoria:target) .btn-top {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
 }
 
 .btn-top:hover {
@@ -53,6 +109,7 @@ html {
         font-size: 20px;
     }
 }
+
 .pulsante-2 {
     animation: pulse 1.5s infinite;
 }
